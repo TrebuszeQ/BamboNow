@@ -1,0 +1,38 @@
+.block
+{
+    display: block;
+}
+
+.noMargin
+{
+    margin: 0;
+}
+
+.noPadding
+{
+    padding: 0;
+}
+
+.fullWidth
+{
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+.infiniteHeight
+{
+    overflow-y: auto;
+    height: 100%;
+}
+
+.darkTheme
+{
+    background-color: #23232a;
+}
+
+#test
+{
+    width: 400px;
+    height: 400px;
+}
