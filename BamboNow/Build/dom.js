@@ -1,12 +1,14 @@
 "use strict";
 // module "dom"
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.instanceTable = exports.Webpage = void 0;
 // To do & worknotes
 // null
 // Last thought
 // static CSS, dynamic HTML via mainly templates
-const main_1 = require("./main");
-main_1.instanceTable[1];
+// import { instanceController, arrayURL } from './main'
+let instanceTable = [];
+exports.instanceTable = instanceTable;
 const newDiv = document.createElement("div");
 const siteWrapper = document.getElementById('siteWrapper');
 const siteWrapperIn = siteWrapper.innerHTML;
@@ -246,48 +248,192 @@ class FAIconsHTML extends BodyElementHTML {
         this.x.setAttribute("class", `fa fa-${this.classCss}`);
     }
 }
-/*class metaHTML extends ElementHTML
-{
-  constructor( public tagName: string, public value?: string )
-  {
-    let location: HTMLElement = document.head;
-    let head: HTMLHeadElement = location;
-    super( tagName, location )
-    
-    head.querySelector( "head[ charset = 'utf-8' ]" );
-  }
-
-  metaBuilder( )
-  {
-    let head: HTMLHeadElement = document.head;
-    let x: HTMLMetaElement | null = head.querySelector("head[ name =  'description' ]");
-    if ( x != null )
-    {
-      x!.setAttribute( "content", this.description );
+class Webpage {
+    constructor(templateId, pageTitle, author, description, keywords) {
+        this.templateId = templateId;
+        this.pageTitle = pageTitle;
+        this.author = author;
+        this.description = description;
+        this.keywords = keywords;
+        const htmlTemplate = `<!DOCTYPE html>
+    <html lang="en-EN" id="primaryDoc" name="primaryDoc">
+        <head id="primaryHead" name="primaryHead">
+          <meta charset="UTF-8">
+          <title>${this.pageTitle}</title> 
+          <meta name="viewport" content="width = device-width, initial-scale = 1 ">
+          <meta name="keywords" content="${this.keywords}">
+          <meta name="descripion" content="${this.description}">
+          <meta name="author" content="Hubert Dąbrowski, Hubert Dabrowski ${this.author}">
+          <title id="primaryTitle"></title>
+          <style id="innerStyle" name="innerStyle"></style>
+          <link rel="stylesheet" href="" id="outerStyle" name="outerStyle">
+          <link rel="stylesheet" href="http://localhost/BamboNow/Build/index.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        </head>
+        <body id="primaryBody" name="primaryBody">
+            <div id="siteWrapper" name="siteWrapper" class="block relative contentBox noMargin noPadding fullWitdh infiniteHeight">
+            <script> var exports = {} </script>
+            <script type="module" src="http://localhost/BamboNow/Build/dom.js"></script>
+            </div>
+        </body>
+    </html>`;
+        const file = new File([` ${htmlTemplate}`], `${this.pageTitle}.html`, { type: "text/html" });
+        const fileURL = URL.createObjectURL(file);
+        console.log(` File address: ${fileURL} `);
+        fetchingManager(fileURL, this.pageTitle);
+        return;
     }
-    else
-    {
-      head.appendChild(  )
+    metaDebug(doc) {
+        let metaElement = doc.createElement("meta");
+        doc.getElementsByTagName('head')[0].id = 'primaryHead';
+        const head = doc.getElementById('primaryHead');
+        let validator = false;
+        let author = this.author;
+        let keywords = this.keywords;
+        let description = this.description;
+        function viewportDebug() {
+            validator = false;
+            let x = head.querySelector(`meta[ name = viewport ]`);
+            if (x != null) {
+                x.setAttribute("conent", "width = device-width, initial-scale = 1");
+                return validator = true;
+            }
+            else {
+                head.append(metaElement);
+                metaElement.setAttribute('name', 'viewport');
+                metaElement.setAttribute('content', 'width = device-width, initial-scale = 1');
+                return validator = true;
+            }
+        }
+        function authorDebug() {
+            if (author != null) {
+            }
+            else {
+                author = '';
+            }
+            validator = false;
+            let x = head.querySelector(`meta[ name = viewport ]`);
+            if (x != null) {
+                x.setAttribute('content', `Hubert Dąbrowski, Hubert Dabrowski, ${author}`);
+                return validator = true;
+            }
+            else {
+                head.append(metaElement);
+                metaElement.setAttribute('name', 'author');
+                metaElement.setAttribute('content', `Hubert Dąbrowski, Hubert Dabrowski, ${author}`);
+                return validator = true;
+            }
+        }
+        function descriptionDebug() {
+            if (description != null) {
+            }
+            else {
+                description = '';
+            }
+            validator = false;
+            let x = head.querySelector("description");
+            if (x != null) {
+                x.setAttribute("content", description);
+                return validator = true;
+            }
+            else {
+                head.append(metaElement);
+                metaElement.setAttribute("name", "description");
+                metaElement.setAttribute("content", description);
+                return validator = true;
+            }
+        }
+        function keywordsDebug() {
+            if (keywords != null) {
+            }
+            else {
+                keywords = '';
+            }
+            validator = false;
+            let x = head.querySelector("keywords");
+            if (x != null) {
+                x.setAttribute("content", keywords);
+                return validator = true;
+            }
+            else {
+                head.append(metaElement);
+                metaElement.setAttribute("name", "keywords");
+                metaElement.setAttribute("content", keywords);
+                return validator = true;
+            }
+        }
+        viewportDebug();
+        authorDebug();
+        descriptionDebug();
+        keywordsDebug();
+        if (validator === false) {
+            console.log("Meta data is not validated.");
+            return validator;
+        }
+        else {
+            return validator;
+        }
     }
-    HTMLMetaElement
-  }
 }
-*/
-let ticketing;
-ticketing;
-{
-    let mainHeader = new SemanticHTML("header", siteWrapper, "mainHeader", "block noMargin noPadding relative floatLeft contentBox fullWidth darkTheme mainHeader");
-    let leftAside = new SemanticHTML("aside", siteWrapper, "leftAside", "grid noMargin noPadding relative floatLeft contentBox darkTheme leftAside");
-    let leftAsideButtonHome = new ButtonHTML(document.getElementById("leftAside"), "asideButtonHome", "block noMargin noPadding relative floatLeft contentBox asideButton darkTheme");
-    let asideHomeParagraph = new ParagraphHTML(document.getElementById("asideButtonHome"), "asideHomeParagraph", "whiteFont noPadding noMargin asideButtonParagraph", " Home");
-    let faiHome = new FAIconsHTML(document.getElementById("asideHomeParagraph"), "home");
-    asideHomeParagraph.fillParagraph();
-    let mainContent = new SemanticHTML("content", siteWrapper, "mainContent", "grid noMargin noPadding relative floatLeft contentBox midTheme mainContent");
-    let contentNav = new SemanticHTML("nav", document.getElementById('mainContent'), "topContentNav", "block noMargin noPadding relative floatLeft contentBox darkTheme contentNav");
-    let contnetNav2 = new SemanticHTML("nav", document.getElementById('mainContent'), "midContentNav", "grid noMargin noPadding relative floatLeft contentBox darkTheme contentNav");
-    let sectionContent = new SemanticHTML("content", document.getElementById('mainContent'), "sectionContent", "grid noMargin noPadding relative floatLeft contentBox singleSection");
-    let rightAside = new SemanticHTML("aside", siteWrapper, "rightAside", "hidden noMargin noPadding relative floatLeft contentBox midTheme rightAside");
+exports.Webpage = Webpage;
+class Redirection {
+    constructor(blobURL, pageTitle) {
+        this.blobURL = blobURL;
+        this.pageTitle = pageTitle;
+        let state = {
+            'page_title': this.pageTitle,
+            'user_id': ''
+        };
+        const demandedURL = new URL(`http://localhost/BamboNow/Build/${this.pageTitle}`);
+        let x = window.location;
+        if (String(x) === 'address') {
+            window.location.href = blobURL;
+            history.pushState(state, '', demandedURL);
+        }
+    }
 }
+//----------------------------------------------------------------------------------------------main-------------------
+function fetchingManager(fileURL, pageTitle) {
+    const requestBuild = new Request(fileURL);
+    fetch(requestBuild)
+        .then(function (response) {
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}.`);
+        }
+        else {
+            console.log('Resource fetched successfully. ');
+            return pageBuilder(fileURL, pageTitle);
+        }
+    });
+}
+function pageBuilder(fileURL, pageTitle) {
+    console.log('Page building process ran.');
+    switch (pageTitle) {
+        case 'ticketing':
+            console.log(`Window.location: ${String(window.location)}; fileURL: ${fileURL};`);
+            function ticketingComponents() {
+                let redirectionTicketing = new Redirection(fileURL, pageTitle);
+                let mainHeader = new SemanticHTML("header", siteWrapper, "mainHeader", "block noMargin noPadding relative floatLeft contentBox fullWidth darkTheme mainHeader");
+                let leftAside = new SemanticHTML("aside", siteWrapper, "leftAside", "grid noMargin noPadding relative floatLeft contentBox darkTheme leftAside");
+                let leftAsideButtonHome = new ButtonHTML(document.getElementById("leftAside"), "asideButtonHome", "block noMargin noPadding relative floatLeft contentBox asideButton darkTheme");
+                let asideHomeParagraph = new ParagraphHTML(document.getElementById("asideButtonHome"), "asideHomeParagraph", "whiteFont noPadding noMargin asideButtonParagraph", " Home");
+                let faiHome = new FAIconsHTML(document.getElementById("asideHomeParagraph"), "home");
+                asideHomeParagraph.fillParagraph();
+                let mainContent = new SemanticHTML("content", siteWrapper, "mainContent", "grid noMargin noPadding relative floatLeft contentBox midTheme mainContent");
+                let contentNav = new SemanticHTML("nav", document.getElementById('mainContent'), "topContentNav", "block noMargin noPadding relative floatLeft contentBox darkTheme contentNav");
+                let contnetNav2 = new SemanticHTML("nav", document.getElementById('mainContent'), "midContentNav", "grid noMargin noPadding relative floatLeft contentBox darkTheme contentNav");
+                let sectionContent = new SemanticHTML("content", document.getElementById('mainContent'), "sectionContent", "grid noMargin noPadding relative floatLeft contentBox singleSection");
+                let rightAside = new SemanticHTML("aside", siteWrapper, "rightAside", "hidden noMargin noPadding relative floatLeft contentBox midTheme rightAside");
+                return console.log('Page built.');
+            }
+            ticketingComponents();
+        default:
+            console.log('No case found.');
+            break;
+    }
+}
+// ------------------------------------------------------------------------------------------------------
+let ticketing = new Webpage(document.getElementById("emptyInstance"), "ticketing");
 /* class templateHandler
 {
 constructor( public location: HTMLElement, public id: string, public name: string )

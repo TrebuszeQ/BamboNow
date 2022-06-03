@@ -1,23 +1,40 @@
 <!DOCTYPE html>
-<html lang="pl-PL">
-    <head>
+<html lang="en-EN" id="primaryDoc" name="primaryDoc">
+    <head id="primaryHead" name="primaryHead">
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>BamboNow</title>
+        <script type="text/javascript">
+            if( typeof( Worker ) !== "undefined" )
+            {
+                if( typeof( a ) == "undefined" )
+                {
+                    a = new Worker( "http://localhost/BamboNow/Build/timeWorker.js" );
+                }
+                a.onmessage = function( event )
+                {
+                }
+            }
+            
+            else
+            {
+                console.log( "Browser doesn't support web workers" );  
+            }
+        </script>
+        <meta name="viewport" content="width = device-width, initial-scale = 1 ">
         <meta name="keywords" content="">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Create new ticket</title>
-        <style></style>
-        </style>
-        <link rel="stylesheet" href="http://localhost/BamboNow/BamboNow/Build/index.css">
+        <meta name="descripion" content="">
+        <meta name="author" content="Hubert Dąbrowski, Hubert Dabrowski">
+        <title id="primaryTitle"></title>
+        <style id="innerStyle" name="innerStyle"></style>
+        <link rel="stylesheet" href="" id="outerStyle" name="outerStyle">
+        <link rel="stylesheet" href="http://localhost/BamboNow/Build/index.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <div id="siteWrapper" class="block relative contentBox noMargin noPadding fullWitdh infiniteHeight">
-        </div>
+    <body id="primaryBody" name="primaryBody">
+        <div id="siteWrapper" name="siteWrapper" class="block relative contentBox noMargin noPadding fullWitdh infiniteHeight">
         <script> var exports = {} </script>
-        <script type="module" src="http://localhost/BamboNow/BamboNow/Build/main.js"></script>
-        <script type="module" src="http://localhost/BamboNow/BamboNow/Build/domCreator.js"></script>
+        <script type="module" src="http://localhost/BamboNow/Build/dom.js"></script>
+        </div>
     </body>
 </html>
 
@@ -41,25 +58,5 @@
             </menu>
 </template>
 
-<template id="emptyInstance" name="emptyInstance">
-    <!DOCTYPE html>
-    <html lang="en-EN" id="primaryDoc" name="primaryDoc">
-        <head id="primaryHead" name="primaryHead">
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width = device-width, initial-scale = 1 ">
-            <meta name="keywords" content="">
-            <meta name="descripion" content="">
-            <meta name="author" content="Hubert Dąbrowski, Hubert Dabrowski">
-            <title id="primaryTitle"></title>
-            <style id="innerStyle" name="innerStyle"></style>
-            <link rel="stylesheet" href="" id="outerStyle" name="outerStyle">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        </head>
-        <body id="primaryBody" name="primaryBody">
-            <div id="siteWrapper" name="siteWrapper">
-            </div>
-            <script src="http://localhost/BamboNow/BamboNow/Build//domCreator.js">
-            </script>
-        </body>
-    </html>
+
 </template>

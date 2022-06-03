@@ -1,155 +1,59 @@
- // module "main"
+// module "main"
 
- import * as dom from "./dom";
+import * as dom from "./dom";
+import { Webpage, instanceTable } from "./dom";
 
- let instanceTable: Document[];
- 
- type languages = 'pl-PL' | 'en-EN' | 'de-DE';
- 
- function instanceController( x: Document ): unknown
-     {
-         let instance: unknown;
-         return;
- 
-     }
- 
- 
- function emptyInstance( )
- {
-   let emptyInstance: HTMLElement | null = document.getElementById( "emptyInstance" );
-   document.write( String( emptyInstance ) );
-   document.title = "emptyTemplate";
- }
- 
- class Webpage
- {
-    constructor( public templateId: HTMLElement, public pageTitle: string, public author?: string, public description?: string, public keywords?: string )
-     {
-        let x = document.implementation.createHTMLDocument( this.pageTitle );
-        x = instanceTable[ instanceTable.length ];
-     }
-     
 
-    metaDebug()
-    {
-        let metaElement: HTMLMetaElement = document.createElement( "meta" );
-        const head = document.getElementById( 'primaryHead' )!;
-        document.getElementsByTagName( 'head' )[0].id = 'primaryHead';
+
+/*
+let demandedURL: string | null = new URLSearchParams( document.location.search ).get( 'address' );
+
+type languages = 'pl-PL' | 'en-EN' | 'de-DE';
+const arrayURL: URL[] = [];
+const entryState: URL = new URL( 'http://localhost/BamboNow/Build/index.html' );
+arrayURL[ 0 ] = entryState;
+
+function instanceController( demandedURL )
+{ 
+  arrayURL[ arrayURL.length ] = address;
+
+  
+
+  let state =
+  {
+    'page_id': '',
+    'user_id': ''
+  }
+  window.history.pushState( state, '', address );
+  window.history.replaceState( state, '', address );
+
  
-        let validator: boolean = false;
- 
-        let author = this.author
-        let keywords = this.keywords;
-        let description = this.description;
- 
-        function viewportDebug(): boolean
-        {
-            validator = false;
-            let x = head.querySelector( "name = 'viewport'" );
-            if( x != null )
-            {
-                x.setAttribute( "conent", "width = device-width, initial-scale = 1" );
-                return validator = true;
-            }
-             
-            else
-            {
-                head.append( metaElement );
-                metaElement.setAttribute( 'name', 'viewport' );
-                metaElement.setAttribute( 'content', 'width = device-width, initial-scale = 1' );
-                return validator = true;
-            }
-        }
-        function authorDebug( ): boolean
-        {
-            if( author != null )
-            {
-            }
- 
-            else
-            {
-                author = '';
-            }
- 
-            validator = false;
-            let x = head.querySelector( "name = 'author'" )
-            if( x != null )
-            {
-                x.setAttribute( 'content', `Hubert Dąbrowski, Hubert Dabrowski, ${ author }`)
-                return validator = true;
-            }
-             
-            else
-            {
-                head.append( metaElement );
-                metaElement.setAttribute( 'name', 'author' );
-                metaElement.setAttribute( 'content', `Hubert Dąbrowski, Hubert Dabrowski, ${ author }`);
-                return validator = true;
-            }
-        }
- 
-        function descriptionDebug(): boolean
-        {
-            if( description != null )
-            {
-            }
- 
-            else
-            {
-                description = '';
-            }
- 
-            validator = false;
-            let x = head.querySelector( "description" )
-            if( x != null )
-            {
-                x.setAttribute( "content", description );
-                return validator = true;
-            }
- 
-            else
-            {
-                head.append( metaElement );
-                metaElement.setAttribute( "name", "description" );
-                metaElement.setAttribute( "content", description );
-                return validator = true;
-            }
-        }
- 
-        function keywordsDebug(): boolean
-        {
-            if( keywords != null )
-            {
-            }
- 
-            else
-            {
-                keywords = '';
-            }
- 
-            validator = false;
-            let x = head.querySelector( "keywords" );
-            if( x != null )
-            {
-                x.setAttribute( "content", keywords );
-                return validator = true;
-            }
- 
-            else
-            {
-                head.append( metaElement );
-                metaElement.setAttribute( "name", "keywords" );
-                metaElement.setAttribute( "content", keywords );
-                return validator = true;
-            }
-        }
-    }
-     
+
+  switch( address )
+  {
+    case entryState:
+      return document.write( `Application empty instance.` )
+    default:
+      return;
+  }
 }
+
+instanceController( window.location. );
+ // ------------------------------------------------------------------------------------------------------
+
+
  
+ /*
+ if( window.Worker )
+ {
+   let testWorker: Worker = new Worker( 'main.js' );
+   
+ }
+ */
+
  
  // Exports ------------------------------------------------------------------------------------------------------
  
- export { instanceTable, instanceController, Webpage };
+ // export { instanceController, arrayURL };
  
  
